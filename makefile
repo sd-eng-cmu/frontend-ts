@@ -1,5 +1,5 @@
-REMOTE_HOST := sd-eng@10.10.12.86
-APP_NAME := sd-eng-frontend
+REMOTE_HOST=sd-eng@10.10.12.86
+APP_NAME=sd-eng-frontend-ts
 
 build-deploy:
 	docker build --platform linux/amd64 -t ${APP_NAME} .
