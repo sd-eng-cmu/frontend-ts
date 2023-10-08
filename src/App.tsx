@@ -1,35 +1,80 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-
+import FixedLayer from "common/components/layer/FixedLayer";
+import AppPageLoader from "common/components/middleware/AppPageLoader";
+import { ClientRouteKey } from "common/constants/keys";
+import {
+  INITIAL_STATE,
+  StoreContext,
+  writePartialStore
+} from "common/contexts/StoreContext";
+import { validateLocalToken } from "core/auth";
+import { config } from "core/config";
+import routes from "core/routes";
+import DebugPanel from "debug/components/DebugPanel";
+import { useState } from "react";
+import { ErrorBoundary } from "react-error-boundary";
+import { Toaster } from "react-hot-toast";
+import { useQuery } from "react-query";
+import { Navigate, useNavigate } from "react-router-dom";
+import { Routes, Route } from "react-router-loading";
 function App() {
-  const [count, setCount] = useState(0)
+  const navigate = useNavigate();
+
+  const storeValue = useState({ ...INITIAL_STATE });
+  const { status } = useQuery("init", initData, {
+    staleTime: Infinity,
+    onSuccess: (data) => {
+      if (data) {
+        storeValue[1](writePartialStore({ userData: data.userData }));
+
+        if (window.location.pathname !== ClientRouteKey.Home) {
+          navigate(ClientRouteKey.Home, { replace: true });
+        }
+      }
+    }
+  });
+
+  async function initData() {
+    const [data] = await Promise.all([validateLocalToken()]);
+
+    return data;
+  }
+
+  function handleError(err: Error) {
+    console.error(err);
+  }
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <StoreContext.Provider value={storeValue}>
+      <Toaster />
+      <FixedLayer>
+        <DebugPanel isDisplayed={!config.isProductionMode} routes={routes} />
+        <AppPageLoader isLoading={status === "loading"} />
+      </FixedLayer>
+      {status === "loading" ? null : status === "success" ? (
+        <Routes>
+          {routes.map(({ path, component: Component, loading = false }) => (
+            <Route
+              key={path}
+              path={path}
+              element={
+                <ErrorBoundary
+                  fallback={
+                    <div>Something went wrong. please refresh the page.</div>
+                  }
+                  onError={handleError}
+                >
+                  <Component />
+                </ErrorBoundary>
+              }
+              loading={loading}
+            />
+          ))}
+        </Routes>
+      ) : (
+        <Navigate to={ClientRouteKey.Login} replace={true} />
+      )}
+    </StoreContext.Provider>
+  );
 }
 
-export default App
+export default App;

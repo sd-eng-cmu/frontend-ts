@@ -5,13 +5,14 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
   "dependencies": {
     "axios": "^1.5.1",
     "clsx": "^2.0.0",
+    "dayjs": "1.11.10",
     "deep-object-diff": "1.1.9",
     "file-saver": "^2.0.5",
     "lodash-es": "4.17.21",
@@ -24,25 +25,31 @@
     "react-query": "^3.39.3",
     "react-router-dom": "^6.16.0",
     "react-router-loading": "1.0.2",
+    "react-transition-group": "4.4.5",
     "styled-components": "^6.0.8",
-    "tailwindcss": "^3.3.3"
+    "tsdef": "0.0.14"
   },
   "devDependencies": {
-    "dotenv-extended": "2.9.0",
     "@types/file-saver": "^2.0.5",
     "@types/lodash-es": "4.17.9",
     "@types/node": "20.8.0",
-    "@types/styled-components": "5.1.28",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
+    "@types/react-transition-group": "4.4.7",
+    "@types/styled-components": "5.1.28",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
     "@vitejs/plugin-react-swc": "^3.3.2",
+    "autoprefixer": "10.4.16",
+    "dotenv-extended": "2.9.0",
     "eslint": "^8.45.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
+    "postcss": "8.4.31",
+    "tailwindcss": "3.3.3",
     "typescript": "^5.0.2",
-    "vite": "^4.4.5"
+    "vite": "^4.4.5",
+    "vite-tsconfig-paths": "4.2.1"
   },
   "resolutions": {
     "styled-components": "^5"
