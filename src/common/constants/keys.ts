@@ -7,9 +7,9 @@ export const enum ClientRouteKey {
 }
 
 export const enum ApiRouteKey {
-  OAuth = "/cmuOAuth",
+  OAuth = "/oauth",
   MyData = "/user/me",
-  ClearCookies = "/cookie/clear"
+  SignOut = "/user/signout"
 }
 
 export const enum LocalStorageKey {

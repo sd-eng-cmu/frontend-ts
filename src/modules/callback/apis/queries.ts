@@ -8,7 +8,7 @@ export function getLoginValidationQuery(code: string): Promise<nil> {
       .post(ApiRouteKey.OAuth, null, {
         params: new URLSearchParams({ code })
       })
-      .then(() => resolve(null))
+      .then((res) => resolve(res.data))
       .catch(reject);
   });
 }

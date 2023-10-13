@@ -1,5 +1,5 @@
-import { getClearCookies } from "common/apis/cookies";
-import { ClientRouteKey } from "common/constants/keys";
+import { getLogout } from "common/apis/logout";
+import { ClientRouteKey, LocalStorageKey } from "common/constants/keys";
 import { StoreContext, writePartialStore } from "common/contexts/StoreContext";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
@@ -11,9 +11,9 @@ function HomePage() {
   const loadingContext = useLoadingContext();
   loadingContext.done();
   async function handleLogout() {
-    await getClearCookies();
+    await getLogout();
     setStore(writePartialStore({ userData: null }));
-
+    localStorage.removeItem(LocalStorageKey.Auth);
     navigate(ClientRouteKey.Login);
   }
   return (

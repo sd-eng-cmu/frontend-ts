@@ -4,7 +4,7 @@ import { StoreContext, writePartialStore } from "common/contexts/StoreContext";
 import { useContext, useEffect } from "react";
 import { useLoadingContext } from "react-router-loading";
 import { Navigate, useNavigate } from "react-router-dom";
-import { ClientRouteKey } from "common/constants/keys";
+import { ClientRouteKey, LocalStorageKey } from "common/constants/keys";
 import { getUserDataQuerySelector } from "common/apis/selectors";
 import toast from "react-hot-toast";
 import AppPageLoader from "common/components/middleware/AppPageLoader";
@@ -47,8 +47,11 @@ function OAuthPage() {
     async function callbackHandler() {
       if (!code) return;
 
-      await mutateAsyncLoginValidation(code);
+      const res = (await mutateAsyncLoginValidation(code)) as unknown as {
+        payload: string;
+      };
       const data = await mutateAsyncUserData();
+      localStorage.setItem(LocalStorageKey.Auth, res.payload);
       setStore(writePartialStore({ userData: data.userData }));
       loadingContext.done();
       navigate(ClientRouteKey.Home);
