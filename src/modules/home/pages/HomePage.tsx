@@ -18,7 +18,7 @@ function HomePage() {
   }
   return (
     <div>
-      <h2>Home Page</h2>
+      
       <button onClick={() => handleLogout()}>Logout</button>
     </div>
   );

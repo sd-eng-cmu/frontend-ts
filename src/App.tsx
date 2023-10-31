@@ -16,6 +16,7 @@ import { Toaster } from "react-hot-toast";
 import { useQuery } from "react-query";
 import { Navigate, useNavigate } from "react-router-dom";
 import { Routes, Route } from "react-router-loading";
+import Navbar from "components/navbar";
 function App() {
   const navigate = useNavigate();
 
@@ -25,7 +26,7 @@ function App() {
     onSuccess: (data) => {
       if (data) {
         storeValue[1](writePartialStore({ userData: data.userData }));
-
+        
         if (window.location.pathname !== ClientRouteKey.Home) {
           navigate(ClientRouteKey.Home, { replace: true });
         }
@@ -46,6 +47,7 @@ function App() {
   return (
     <StoreContext.Provider value={storeValue}>
       <Toaster />
+    <Navbar />
       <FixedLayer>
         <DebugPanel isDisplayed={!config.isProductionMode} routes={routes} />
         <AppPageLoader isLoading={status === "loading"} />
