@@ -4,28 +4,36 @@ import styled from "styled-components";
 function LoginPage() {
   return (
     <Container>
-      <Login>
+      <Login className="p-4 md:p-16">
         <img
           className="object-scale-down w-[20em] mx-auto mt-[-2em]"
           src="/images/logoFaculty.png"
         />
         <div className="topic-container">
-          <p className="topic-text text-2xl md:text-3xl">
+          <p className="text-2xl font-semibold md:text-3xl">
             ระบบจัดการข้อมูลใบคำขอทั่วไป
           </p>
-          <p className="topic-text-faculty text-base md:text-[1.35em]">
+          <p className="font-normal text-base md:text-[1.35em]">
             คณะวิศวกรรมศาสตร์ มหาวิทยาลัยเชียงใหม่
           </p>
         </div>
-        <div className="login-text mt-16">ลงชื่อเข้าสู่ระบบ</div>
-        <a className="login-button" href={config.cmuOAuthUrl} target="_self">
+        <div className="mt-12 text-center text-black text-base">
+          ลงชื่อเข้าสู่ระบบ
+        </div>
+        <LoginBtn
+          className="login-btn"
+          href={config.cmuOAuthUrl}
+          target="_self"
+        >
           <img
-            src="/images/emblemcmu.png"
+            src="/images/cmu-logo.svg"
             alt="emblem"
-            className="object-scale-down w-8"
+            className="object-scale-down w-8 flex-[1]"
           />
-          <p>Login with CMU Account</p>
-        </a>
+          <div className="flex justify-center items-center border-l border-[#6869AC] h-full flex-[2]">
+            <p className="font-normal text-2xl text-white">CMU Account</p>
+          </div>
+        </LoginBtn>
       </Login>
     </Container>
   );
@@ -42,8 +50,8 @@ const Container = styled.div`
 `;
 
 const Login = styled.div`
-  width: 90%;
-  height: 70%;
+  max-width: fit-content;
+  max-height: fit-content;
   border-radius: 1.5em;
   background: #fff;
   filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.25));
@@ -51,41 +59,29 @@ const Login = styled.div`
   .topic-container {
     text-align: center;
     color: #68010e;
-    margin-top: -3em;
+    margin-top: -5em;
   }
+`;
 
-  .topic-text {
-    font-weight: 600;
-  }
+const LoginBtn = styled.a`
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-  .topic-text-faculty {
-    font-weight: 400;
-  }
+  margin: 0 auto;
+  margin-top: 0.75em;
+  padding: 0.25em 0;
 
-  .login-text {
-    text-align: center;
-    color: #000000;
-    font-size: 1.5em;
-  }
+  max-width: 15em;
+  height: 3.4em;
 
-  .login-button {
-    margin: 0 auto;
-    margin-top: 1.25em;
-    padding: 0.8em 1.1em;
-    max-width: max-content;
-    border-radius: 5px;
-    background: linear-gradient(
-        90deg,
-        rgba(237, 242, 248, 0.35) 1.83%,
-        rgba(237, 242, 248, 0) 76.08%
-      ),
-      var(--purple-5-purple, #6869ac);
-    align-self: center;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    display: flex;
-    gap: 0.5em;
-    font-size: 1.3em;
-  }
+  font-size: 1.3em;
+
+  border-radius: 5px;
+  background: linear-gradient(
+      90deg,
+      rgba(237, 242, 248, 0.35) 1.83%,
+      rgba(237, 242, 248, 0) 76.08%
+    ),
+    var(--purple-5-purple, #6869ac);
 `;

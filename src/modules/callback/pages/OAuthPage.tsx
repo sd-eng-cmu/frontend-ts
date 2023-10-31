@@ -45,16 +45,20 @@ function OAuthPage() {
 
   useEffect(() => {
     async function callbackHandler() {
-      if (!code) return;
-
-      const res = (await mutateAsyncLoginValidation(code)) as unknown as {
-        payload: string;
-      };
-      const data = await mutateAsyncUserData();
-      localStorage.setItem(LocalStorageKey.Auth, res.payload);
-      setStore(writePartialStore({ userData: data.userData }));
-      loadingContext.done();
-      navigate(ClientRouteKey.Home);
+      if (!code) {
+        console.error("Callback 'code' missing");
+        loadingContext.done();
+        setTimeout(() => navigate(ClientRouteKey.Login), 1);
+      } else {
+        const res = (await mutateAsyncLoginValidation(code)) as unknown as {
+          payload: string;
+        };
+        const data = await mutateAsyncUserData();
+        localStorage.setItem(LocalStorageKey.Auth, res.payload);
+        setStore(writePartialStore({ userData: data.userData }));
+        loadingContext.done();
+        navigate(ClientRouteKey.Home);
+      }
     }
 
     callbackHandler();
