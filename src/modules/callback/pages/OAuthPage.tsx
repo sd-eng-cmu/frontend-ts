@@ -54,14 +54,10 @@ function OAuthPage() {
           payload: string;
         };
 
-        
         const data = await mutateAsyncUserData();
-        
-        
+
         localStorage.setItem(LocalStorageKey.Auth, res.payload);
         setStore(writePartialStore({ userData: data.userData }));
-        
-        loadingContext.done();
         navigate(ClientRouteKey.Home);
       }
     }

@@ -3,6 +3,7 @@ import { getUserDataQuery } from "./queries";
 
 export async function getUserDataQuerySelector() {
   const [userDataRes] = await Promise.all([getUserDataQuery()]);
+
   const userData: User = {
     account: userDataRes.cmuitaccount,
     student_id: userDataRes.student_id,
@@ -12,6 +13,7 @@ export async function getUserDataQuerySelector() {
     organization_name: userDataRes.organization_name_TH,
     type: userDataRes.itaccounttype_id
   };
+
   return {
     userData
   };

@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 
 function Unauth() {
   const navigate = useNavigate();
-
   function handleBack() {
     navigate(ClientRouteKey.Login, { replace: true });
   }

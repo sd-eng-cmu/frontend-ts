@@ -26,7 +26,7 @@ function App() {
     onSuccess: (data) => {
       if (data) {
         storeValue[1](writePartialStore({ userData: data.userData }));
-        
+
         if (window.location.pathname !== ClientRouteKey.Home) {
           navigate(ClientRouteKey.Home, { replace: true });
         }
@@ -47,7 +47,7 @@ function App() {
   return (
     <StoreContext.Provider value={storeValue}>
       <Toaster />
-    <Navbar />
+      <Navbar />
       <FixedLayer>
         <DebugPanel isDisplayed={!config.isProductionMode} routes={routes} />
         <AppPageLoader isLoading={status === "loading"} />

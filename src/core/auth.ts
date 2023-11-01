@@ -9,6 +9,7 @@ export async function validateLocalToken() {
       throw new Error();
     }
     const data = await getUserDataQuerySelector();
+
     return data;
   } catch (err) {
     localStorage.removeItem(LocalStorageKey.Auth);
