@@ -5,6 +5,7 @@ import OAuthPage from "modules/callback/pages/OAuthPage";
 import HomePage from "modules/home/pages/HomePage";
 import LoginPage from "modules/login/pages/LoginPage";
 import RootPage from "modules/root/pages/RootPage";
+import StreamPage from "modules/genpdf/pages/StreamPage";
 
 const routes = [
   {
@@ -28,6 +29,10 @@ const routes = [
   {
     path: ClientRouteKey.Wildcard,
     component: NotFound
+  },
+  {
+    path: ClientRouteKey.StreamPDF,
+    component: StreamPage
   }
 ];
 
