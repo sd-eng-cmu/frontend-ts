@@ -32,7 +32,8 @@ const routes = [
   },
   {
     path: ClientRouteKey.StreamPDF,
-    component: StreamPage
+    component: StreamPage,
+    loading: true
   }
 ];
 
