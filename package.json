@@ -41,6 +41,8 @@
     "react-hook-form": "7.47.0",
     "react-hot-toast": "^2.4.1",
     "react-icons": "4.11.0",
+    "react-pdf": "7.5.1",
+    "react-pdf-html": "1.1.18",
     "react-query": "^3.39.3",
     "react-router-dom": "^6.16.0",
     "react-router-loading": "1.0.2",

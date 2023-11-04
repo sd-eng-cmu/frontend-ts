@@ -6,6 +6,7 @@ import PDFFile from "./PDFFile";
 
 function StreamPage() {
   const [{ userData }] = useContext(StoreContext);
+  const __filename = "_หนังสือรับรองความประพฤติ";
   return (
     <Container>
       <Login className="p-4 md:p-16">
@@ -19,7 +20,10 @@ function StreamPage() {
             {userData?.first_name} {userData?.last_name}
           </p>
         </div>
-        <PDFDownloadLink document={<PDFFile />} fileName={userData?.student_id}>
+        <PDFDownloadLink
+          document={<PDFFile />}
+          fileName={userData?.student_id + __filename}
+        >
           {({ loading }) =>
             loading ? (
               <button>Loading Document...</button>
@@ -28,7 +32,6 @@ function StreamPage() {
             )
           }
         </PDFDownloadLink>
-        {/* <PDFFile /> */}
       </Login>
     </Container>
   );
