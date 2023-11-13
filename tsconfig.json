@@ -20,7 +20,11 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
+
+  
+    
   },
-  "include": ["src"],
+  "include": ["src/**/*.ts", "src/**/*.tsx", "node_modules/**/*", "src/modules/callback/pages/genPdf.tsx"],
+  "exclude": ["node_modules"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

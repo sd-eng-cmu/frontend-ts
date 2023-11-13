@@ -2,3 +2,4 @@
 declare const IS_PRODUCTION_MODE: string;
 declare const API_ENDPOINT_URL: string;
 declare const CMU_OAUTH_URL: string;
+declare module "html2pdf.js";
