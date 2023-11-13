@@ -1,0 +1,30 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>PDF Result Template</title>
+    <style>
+      .test {
+        font-size: 100;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        background-color: aquamarine;
+      }
+    </style>
+  </head>
+  <body>
+    <div className="test">
+      Date: ${`${today.getDate()}. ${ today.getMonth() + 1 }.
+      ${today.getFullYear()}.`}
+
+      <div>
+        ${store.userData?.prename}${ store.userData?.first_name }
+        ${store.userData?.last_name}
+      </div>
+      <div>รหัสนักศึกษา: ${store.userData?.student_id}</div>
+      <div>วิศวคอมพิวเตอร์</div>
+
+      <br />
+    </div>
+  </body>
+</html>

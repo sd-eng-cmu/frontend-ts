@@ -6,9 +6,11 @@ import { useContext } from "react";
 import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { useLoadingContext } from "react-router-loading";
+import StudentHome from "modules/callback/pages/studentHome";
+import StaffHome from "modules/callback/pages/staffHome";
 
 function HomePage() {
-  const [, setStore] = useContext(StoreContext);
+  const [store, setStore] = useContext(StoreContext);
   const navigate = useNavigate();
   const loadingContext = useLoadingContext();
   useQuery("home-init", noop, {
@@ -24,7 +26,10 @@ function HomePage() {
   }
   return (
     <div>
-      <button onClick={() => handleLogout()}>Logout</button>
+      {store.userData?.type === "MISEmpAcc" ? <StaffHome /> : <StudentHome />}
+      <button className=" mt-52" onClick={() => handleLogout()}>
+        Logout
+      </button>
     </div>
   );
 }
