@@ -27,6 +27,22 @@ const Genpdf: React.FC<GenpdfProps> = ({ docs }) => {
   const preNameOptions = ["นาย", "นางสาว"];
   const [{ userData }] = useContext(StoreContext);
 
+  // Thai month names
+  const thaiMonths = [
+    "มกราคม",
+    "กุมภาพันธ์",
+    "มีนาคม",
+    "เมษายน",
+    "พฤษภาคม",
+    "มิถุนายน",
+    "กรกฎาคม",
+    "สิงหาคม",
+    "กันยายน",
+    "ตุลาคม",
+    "พฤศจิกายน",
+    "ธันวาคม"
+  ];
+
   // Function to handle form submission
   // const handleSubmit = () => {
   //   // Implement your logic to use selectedMajor and selectedDate
@@ -42,44 +58,144 @@ const Genpdf: React.FC<GenpdfProps> = ({ docs }) => {
       <meta charset="utf-8" />
       <title>PDF Result Template</title>
       <style>
-        .test {
-          font-size: 100;
-          flex-direction: row;
+      @font-face {
+        font-family: 'TH SarabunIT๙';
+        src: url('path/to/THSarabunIT9-webfont.woff2') format('woff2'),
+             url('path/to/THSarabunIT9-webfont.woff') format('woff');
+        font-weight: normal;
+        font-style: normal;
+      }
+
+        body {
+          font-family: 'TH SarabunIT๙', sans-serif;
+          display: flex;
           justify-content: center;
           align-items: center;
-          background-color: aquamarine;
+          margin: 0;
+          padding: 0;
+          width: 100%;
         }
+
+        @font-face {
+          font-family: 'TH SarabunIT๙';
+          src: url('path/to/THSarabunIT9-webfont.woff2') format('woff2'),
+               url('path/to/THSarabunIT9-webfont.woff') format('woff');
+          font-weight: normal;
+          font-style: normal;
+        }
+
+        .container {
+          text-align: center;
+        }
+
+        img {
+          width: 120px; 
+          display: block;
+          margin: 40px auto 0 auto; /* Center the image */
+        }
+
+        .test {
+          margin-top: 30px;
+          display: flex;
+          text-align:center ;
+          justify-content: center;
+          align-items: center;
+          /* Add any additional styles for centering the content */
+        }
+
+        .topic {
+          font-weight: bold;
+          font-size: 20px;
+          margin-bottom: 25px;
+        }
+
+        .topic2 {
+          font-weight: bold;
+          display: inline;
+        }
+
+        .topic3 {
+          text-decoration: underline;
+          display: inline;
+        }
+
+        .align-right{
+          margin-left: 250px;
+          margin-top: 25px;
+          margin-bottom: 60px;
+          position: relative;
+        }
+        .footbar-img {
+          width: 120%;
+          display: block;
+          margin: 48px 0 0 0; /* Center the image at the bottom */
+        }
+
+
+
+
+        
       </style>
     </head>
     <body>
-  <div class="test">
-    <div>
-      Date: ${`${today.getDate()}. ${today.getMonth() + 1}.
-      ${today.getFullYear()}.`}
+    <div class="container">
+      <img src="/images/RibbinENG1.png" />
+        <div >
+        <div class = "topic"> 
+          หนังสือรับรองสถานภาพการเป็นนักศึกษา <br />
+          คณะวิศวกรรมศาสตร์ มหาวิทยาลัยเชียงใหม่ <br /> <br /> </div>
+          หนังสือรับรองฉบับนี้ให้ไว้เพื่อแสดงว่า <br /><br />
+          <div class= "topic2">
+            ${selectedPrename}${userData?.first_name}
+            ${userData?.last_name} </div>
+          </div>
+          <br />
+          <div>รหัสประจําตัว <div class= "topic2"> ${userData?.student_id} </div> </div>
+          <br />
+          <div>ในปีการศึกษา 2566 เป็นนักศึกษาระดับปริญญาตรี ชั้นปีที่ ${selectedYear}</div>
+          <br />
+          <div>สาขาวิชา ${selectedMajor}</div>
+          <br />
+          คณะวิศวกรรมศาสตร์ มหาวิทยาลัยเชียงใหม่ 
+          <br /><br />
+          <div class = "align-right">ให้ไว้ ณ วันที่ ${`${today.getDate()} 
+          เดือน ${thaiMonths[today.getMonth()]} พ.ศ. ${
+            today.getFullYear() + 543
+          }`}
+          </div>
+          <br />
+          <div class = "align-right">
+          (ผู้ช่วยศาสตราจารย์ ดร.ปวรุตม์ จงชาญสิทโธ) <br />
+          รองคณบดี ปฏิบัติการแทน <br />
+          คณบดีคณะวิศวกรรมศาสตร์ <br />
+          </div>
+          <br />
+          <div class = "topic3"> หมายเหตุ</div> หนังสือรับรองสถานภาพการเป็นนักศึกษานี้ใช้ได้ 45 วัน นับตั้งแต่วันที่ออกให้
+          <br />
+          <div style="text-indent:-148px;">
+          หรือถึงวันสิ้นสุดสถานภาพการเป็นนักศึกษา</div> </div>
+          <br />
+        </div>
+      <img class="footbar-img" src="/images/footbar.png" />
     </div>
-
-    <div>
-      ${selectedPrename}${userData?.first_name}
-      ${userData?.last_name}
-    </div>
-    <div>รหัสประจำตัว ${userData?.student_id}</div>
-    <div> ในปีการศึกษา 2566 เป็นนักศึกษาระดับปริญญาตรี ชั้นปีที่ ${selectedYear}</div>
-
-    <div>สาขาวิชา ${selectedMajor}</div>
-    <div>คณะวิศวกรรมศาสตร์ มหาวิทยาลัยเชียงใหม่</div>
-    
-  </div>
-</body>
-  </html>  
+  </body>
+</html>  
         `;
   };
 
   const printHandler = () => {
-    // const printElement = ReactDOMServer.renderToString(pdfJSX());
     const printElement = pdfJSX();
-    if (selectedMajor && selectedPrename && selectedYear)
-      htmlPdf().from(printElement).save();
-    else {
+    if (selectedMajor && selectedPrename && selectedYear) {
+      const pdfOptions = {
+        margin: 10,
+        filename: "generated-document.pdf",
+        image: { type: "jpeg", quality: 0.98 },
+        html2canvas: { scale: 2 }, // Increase scale to improve resolution
+        jsPDF: { unit: "mm", format: "a4", orientation: "portrait" }
+      };
+
+      htmlPdf().from(printElement).set(pdfOptions).save();
+    } else {
       alert("กรอกข้อมูลให้ครบถ้วน");
     }
   };
