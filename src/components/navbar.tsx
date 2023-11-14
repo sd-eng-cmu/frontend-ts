@@ -30,9 +30,9 @@ const Navbar: React.FC = () => {
         className="py-2"
         //navbar right content
       >
-        <div className="text-xl font-bold bg-gradient-to-l from-red-100 hover:bg-red-500 shadow-md duration-200 text-center rounded-3xl  px-12  justify-center border-[2px] border-red-500 text-red-500 flex items-center gap-3 hover:cursor-pointer hover:text-white">
+        <div className="text-xl font-bold bg-gradient-to-l from-red-100 hover:bg-red-600 shadow-md duration-200 text-center rounded-3xl  px-12  justify-center border-[1px] border-red-600 text-red-500 flex items-center gap-3 hover:cursor-pointer hover:text-white">
           <BsPersonCircle />
-          <p className=" text-stone-950">
+          <p className=" text-stone-950 font-normal">
             {userData?.first_name} {userData?.last_name}
           </p>
         </div>
