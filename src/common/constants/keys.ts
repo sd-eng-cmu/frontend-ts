@@ -4,7 +4,8 @@ export const enum ClientRouteKey {
   Home = "/home",
   OAuth = "/callback",
   Wildcard = "*",
-  StreamPDF = "/streampdf"
+  StreamPDF = "/streampdf",
+  FormPage = "FormPage"
 }
 
 export const enum ApiRouteKey {

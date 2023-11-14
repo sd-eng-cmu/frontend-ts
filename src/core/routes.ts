@@ -6,6 +6,7 @@ import HomePage from "modules/home/pages/HomePage";
 import LoginPage from "modules/login/pages/LoginPage";
 import RootPage from "modules/root/pages/RootPage";
 import StreamPage from "modules/genpdf/pages/StreamPage";
+import FormPage from "modules/form/pages/formPage";
 
 const routes = [
   {
@@ -33,6 +34,11 @@ const routes = [
   {
     path: ClientRouteKey.StreamPDF,
     component: StreamPage,
+    loading: true
+  },
+  {
+    path: ClientRouteKey.FormPage,
+    component: FormPage,
     loading: true
   }
 ];
