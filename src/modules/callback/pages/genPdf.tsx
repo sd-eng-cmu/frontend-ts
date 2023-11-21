@@ -14,14 +14,18 @@ const Genpdf: React.FC<GenpdfProps> = ({ docs }) => {
 
   //  major and years options
   const majorOptions = [
-    "วิศวกรรมคอมพิวเตอร์",
-    "วิศวกรรมเครื่องกล",
-    "วิศวกรรมไฟฟ้า",
     "วิศวกรรมโยธา",
+    "วิศวกรรมไฟฟ้า",
     "วิศวกรรมสิ่งแวดล้อม",
-    "วิศวกรรมเหมืองแร่และปิโตรเลียม",
+    "วิศวกรรมเครื่องกล",
+    "วิศวกรรมเครื่องกลและการบริหารโครงการวิศวกรรม (หลักสูตรนานาชาติ)",
     "วิศวกรรมอุตสาหการ",
-    "วิศวกรรมหุ่นยนต์และปัญญาประดิษฐ์"
+    "วิศวกรรมเหมืองแร่",
+    "วิศวกรรมคอมพิวเตอร์",
+    "วิศวกรรมหุ่นยนต์และปัญญาประดิษฐ์",
+    "วิศวกรรมบูรณาการ",
+    "วิศวกรรมระบบสารสนเทศและเครือข่าย",
+    "วิศวกรรมอุตสาหการและการจัดการโลจิสติกส์"
   ];
   const yearOptions = ["1", "2", "3", "4", "5", "6", "7", "8"];
   const preNameOptions = ["นาย", "นางสาว"];
@@ -58,16 +62,11 @@ const Genpdf: React.FC<GenpdfProps> = ({ docs }) => {
       <meta charset="utf-8" />
       <title>PDF Result Template</title>
       <style>
-      @font-face {
-        font-family: 'TH SarabunIT๙';
-        src: url('path/to/THSarabunIT9-webfont.woff2') format('woff2'),
-             url('path/to/THSarabunIT9-webfont.woff') format('woff');
-        font-weight: normal;
-        font-style: normal;
+      
       }
 
         body {
-          font-family: 'TH SarabunIT๙', sans-serif;
+
           display: flex;
           justify-content: center;
           align-items: center;
@@ -76,22 +75,22 @@ const Genpdf: React.FC<GenpdfProps> = ({ docs }) => {
           width: 100%;
         }
 
-        @font-face {
-          font-family: 'TH SarabunIT๙';
-          src: url('path/to/THSarabunIT9-webfont.woff2') format('woff2'),
-               url('path/to/THSarabunIT9-webfont.woff') format('woff');
-          font-weight: normal;
-          font-style: normal;
+        h1{
+          font-family: 'Sarabun', sans-serif;
+          font-size: 15px;
         }
 
         .container {
           text-align: center;
+          margin-top: 40px;
+          margin-left: 20px;
+          
         }
 
         img {
           width: 120px; 
           display: block;
-          margin: 40px auto 0 auto; /* Center the image */
+          margin: 20px auto 0 auto; /* Center the image */
         }
 
         .test {
@@ -107,6 +106,7 @@ const Genpdf: React.FC<GenpdfProps> = ({ docs }) => {
           font-weight: bold;
           font-size: 20px;
           margin-bottom: 25px;
+          margin-top: 25px;
         }
 
         .topic2 {
@@ -117,20 +117,45 @@ const Genpdf: React.FC<GenpdfProps> = ({ docs }) => {
         .topic3 {
           text-decoration: underline;
           display: inline;
+          margin-top: 25px;
         }
+        .remark {
 
-        .align-right{
+          display: inline;
+          margin-top: 250px;
+        }
+        
+
+        .date{
           margin-left: 250px;
           margin-top: 25px;
-          margin-bottom: 60px;
+          margin-bottom: 50px;
           position: relative;
         }
-        .footbar-img {
-          width: 120%;
-          display: block;
-          margin: 48px 0 0 0; /* Center the image at the bottom */
+
+        .professor{
+          margin-left: 250px;
+          margin-top: 25px;
+          margin-bottom: 135px;
+          position: relative;
         }
 
+        .bookno {
+          text-align: center;
+          position: relative;
+          margin-bottom: 25px;
+        }
+
+        .footbar-img {
+          width: 100%;
+          display: block;
+          margin:  0; /* Center the image at the bottom */
+        }
+        .p_sign-img{
+          position: absolute;
+          bottom: 270px;
+          left: 150px;
+        }
 
 
 
@@ -138,6 +163,7 @@ const Genpdf: React.FC<GenpdfProps> = ({ docs }) => {
       </style>
     </head>
     <body>
+    <h1>
     <div class="container">
       <img src="/images/RibbinENG1.png" />
         <div >
@@ -158,26 +184,33 @@ const Genpdf: React.FC<GenpdfProps> = ({ docs }) => {
           <br />
           คณะวิศวกรรมศาสตร์ มหาวิทยาลัยเชียงใหม่ 
           <br /><br />
-          <div class = "align-right">ให้ไว้ ณ วันที่ ${`${today.getDate()} 
+          <div class = "date">ให้ไว้ ณ วันที่ ${`${today.getDate()} 
           เดือน ${thaiMonths[today.getMonth()]} พ.ศ. ${
             today.getFullYear() + 543
           }`}
           </div>
           <br />
-          <div class = "align-right">
+          <img class="p_sign-img" src="/images/p_sign.png" />
+          <div class = "professor">
           (ผู้ช่วยศาสตราจารย์ ดร.ปวรุตม์ จงชาญสิทโธ) <br />
           รองคณบดี ปฏิบัติการแทน <br />
           คณบดีคณะวิศวกรรมศาสตร์ <br />
           </div>
           <br />
-          <div class = "topic3"> หมายเหตุ</div> หนังสือรับรองสถานภาพการเป็นนักศึกษานี้ใช้ได้ 45 วัน นับตั้งแต่วันที่ออกให้
+          <div class = "remark"> 
+          <div class = "topic3"> หมายเหตุ</div> หนังสือรับรองสถานภาพการเป็นนักศึกษานี้ใช้ได้ 45 วัน นับตั้งแต่วันที่ออกให้</div>
           <br />
           <div style="text-indent:-148px;">
           หรือถึงวันสิ้นสุดสถานภาพการเป็นนักศึกษา</div> </div>
           <br />
+          <div class = "bookno">${` ${
+            today.getFullYear() + 543
+          }`}
+          </div>
         </div>
       <img class="footbar-img" src="/images/footbar.png" />
     </div>
+    </h1>
   </body>
 </html>  
         `;
@@ -187,7 +220,7 @@ const Genpdf: React.FC<GenpdfProps> = ({ docs }) => {
     const printElement = pdfJSX();
     if (selectedMajor && selectedPrename && selectedYear) {
       const pdfOptions = {
-        margin: 10,
+        margin: 0,
         filename: "generated-document.pdf",
         image: { type: "jpeg", quality: 0.98 },
         html2canvas: { scale: 2 }, // Increase scale to improve resolution
