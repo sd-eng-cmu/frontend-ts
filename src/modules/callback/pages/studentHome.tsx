@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Genpdf from "./genPdf";
+import Genpdf2 from "./genPdf2";
 
 function StudentHome() {
   const [selectedDoc, setSelectedDoc] = useState<string | null>(null);
@@ -12,7 +13,7 @@ function StudentHome() {
 
   return (
     <div style={container_form}>
-            <div className="body">
+      <div className="body">
         <p className=" mt-56">ขอใบคำขอ</p>
         <select onChange={(e) => setSelectedDoc(e.target.value)} style={dropdown}>
           <option value="">Select</option>
@@ -22,10 +23,15 @@ function StudentHome() {
             </option>
           ))}
         </select>
-        {selectedDoc !== null && selectedDoc !== "" && <Genpdf docs={selectedDoc} />}
+        {selectedDoc !== null && selectedDoc !== "" && (
+          selectedDoc === "หนังสือรับรองความประพฤติ" ? (
+            <Genpdf2 docs={selectedDoc} />
+          ) : (
+            <Genpdf docs={selectedDoc} />
+          )
+        )}
       </div>
     </div>
-
   );
 }
 

@@ -7,7 +7,7 @@ interface GenpdfProps {
   docs: string | null;
 }
 
-const Genpdf: React.FC<GenpdfProps> = ({ docs }) => {
+const Genpdf2: React.FC<GenpdfProps> = ({ docs }) => {
   const [selectedPrename, setSelectedPrename] = useState<string | null>(null);
   const [selectedMajor, setSelectedMajor] = useState<string | null>(null);
   const [selectedYear, setSelectedYear] = useState<string | null>(null);
@@ -130,14 +130,14 @@ const Genpdf: React.FC<GenpdfProps> = ({ docs }) => {
         .date{
           margin-left: 250px;
           margin-top: 25px;
-          margin-bottom: 50px;
+          margin-bottom: 25px;
           position: relative;
         }
 
         .professor{
           margin-left: 250px;
           margin-top: 25px;
-          margin-bottom: 135px;
+          margin-bottom: 115px;
           position: relative;
         }
 
@@ -154,7 +154,7 @@ const Genpdf: React.FC<GenpdfProps> = ({ docs }) => {
         }
         .p_sign-img{
           position: absolute;
-          bottom: 270px;
+          bottom: 250px;
           left: 150px;
         }
 
@@ -169,7 +169,7 @@ const Genpdf: React.FC<GenpdfProps> = ({ docs }) => {
       <img src="/images/RibbinENG1.png" />
         <div >
         <div class = "topic"> 
-          หนังสือรับรองสถานภาพการเป็นนักศึกษา <br />
+          หนังสือรับรองความประพฤติ <br />
           คณะวิศวกรรมศาสตร์ มหาวิทยาลัยเชียงใหม่ <br /> <br /> </div>
           หนังสือรับรองฉบับนี้ให้ไว้เพื่อแสดงว่า <br /><br />
           <div class= "topic2">
@@ -184,6 +184,10 @@ const Genpdf: React.FC<GenpdfProps> = ({ docs }) => {
           <div>สาขาวิชา ${selectedMajor}</div>
           <br />
           คณะวิศวกรรมศาสตร์ มหาวิทยาลัยเชียงใหม่ 
+          <br /><br />
+          และในปีการศึกษา ${` ${
+            today.getFullYear() + 543
+          }`} นักศึกษาไม่เคยได้รับโทษทางวินัย
           <br /><br />
           <div class = "date">ให้ไว้ ณ วันที่ ${`${today.getDate()} 
           เดือน ${thaiMonths[today.getMonth()]} พ.ศ. ${
@@ -222,7 +226,7 @@ const Genpdf: React.FC<GenpdfProps> = ({ docs }) => {
     if (selectedMajor && selectedPrename && selectedYear) {
       const pdfOptions = {
         margin: 0,
-        filename: "หนังสือรับรองการเป็นนักศึกษา.pdf",
+        filename: "หนังสือรับรองความประพฤติ.pdf",
         image: { type: "jpeg", quality: 0.98 },
         html2canvas: { scale: 2 }, // Increase scale to improve resolution
         jsPDF: { unit: "mm", format: "a4", orientation: "portrait" }
@@ -301,7 +305,7 @@ const Genpdf: React.FC<GenpdfProps> = ({ docs }) => {
     </div>
   );
 };
-export default Genpdf;
+export default Genpdf2;
 
 const lockBar = {
   borderRadius: "5px",
