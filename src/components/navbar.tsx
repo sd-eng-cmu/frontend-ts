@@ -1,41 +1,69 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import engLogo from "../image/engLogo.png";
 import { BsPersonCircle } from "react-icons/bs";
-import { StoreContext } from "common/contexts/StoreContext";
+import { StoreContext, writePartialStore } from "common/contexts/StoreContext";
 import { useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { getLogout } from "common/apis/logout";
+
+import { ClientRouteKey, LocalStorageKey } from "common/constants/keys";
+
 
 const Navbar: React.FC = () => {
-  const [{ userData }] = useContext(StoreContext);
-
+  const [{ userData }, setStore] = useContext(StoreContext);
   const { pathname } = useLocation();
-  if (pathname === "/login") return;
+  const navigate = useNavigate();
+
+  if (pathname === "/login") return null;
+
+  const [isProfileMenuOpen, setProfileMenuOpen] = useState(false);
+  const [isProfileButtonActive, setProfileButtonActive] = useState(false);
+
+  const toggleProfileMenu = () => {
+    setProfileMenuOpen(!isProfileMenuOpen);
+    setProfileButtonActive(!isProfileButtonActive);
+  };
+
+  const handleLogout = async () => {
+    await getLogout();
+    setStore(writePartialStore({ userData: null }));
+    localStorage.removeItem(LocalStorageKey.Auth);
+    navigate(ClientRouteKey.Login);
+  };
 
   return (
-    <nav
-      className=" flex w-full fixed justify-between items-center top-0 py-2 drop-shadow-lg bg-white px-3 lg:px-10 md:px-8 z-50"
-      //navbar wrapper
-    >
-      <div
-        className="flex items-center gap-2  md:gap-4"
-        //navbar left content
-      >
+    <nav className="flex w-full fixed justify-between items-center top-0 py-2 drop-shadow-lg bg-white px-3 lg:px-10 md:px-8 z-50">
+      <div className="flex items-center gap-2 md:gap-4">
         <img
           src={engLogo}
           alt="EngLogo"
-          className="lg:w-48 md:w-44 w-36  cursor-pointer"
-          // CMU Logo Navbar
+          className="lg:w-48 md:w-44 w-36 cursor-pointer"
         />
       </div>
+      <div className="py-2 relative">
       <div
-        className="py-2"
-        //navbar right content
-      >
-        <div className="text-xl font-bold bg-gradient-to-l from-red-100 hover:bg-red-600 shadow-md duration-200 text-center rounded-3xl  px-12  justify-center border-[1px] border-red-600 text-red-500 flex items-center gap-3 hover:cursor-pointer hover:text-white">
-          <BsPersonCircle />
-          <p className=" text-stone-950 font-normal">
+          className={`text-xl font-bold bg-gradient-to-l from-red-100 ${
+            isProfileButtonActive ? "to-red-400 " : "hover:bg-red-300"
+          } shadow-md duration-200 text-center rounded-3xl px-12 justify-center border-[1px] border-red-600 text-red-600 flex items-center gap-3 cursor-pointer `}
+          onClick={toggleProfileMenu}
+        >
+          <BsPersonCircle
+            color={isProfileButtonActive ? "white" : undefined}
+          />
+          <p className="text-stone-950 font-normal">
+            
             {userData?.first_name} {userData?.last_name}
           </p>
         </div>
+        {isProfileMenuOpen && (
+          <div className="absolute bg-white  rounded-md shadow-md mt-2 py-2 px-4 w-200">
+            <p>รหัสประจำตัว : {userData?.student_id}</p>
+            <p>{userData?.organization_name}</p>
+            <button className="text-red-500 hover:text-white hover:bg-red-600 px-2 py-1 rounded" onClick={handleLogout}>
+              Logout
+            </button>
+          </div>
+        )}
       </div>
     </nav>
   );

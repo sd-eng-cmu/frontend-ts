@@ -1,6 +1,6 @@
 // import ReactDOMServer from "react-dom/server";
 import htmlPdf from "html2pdf.js";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { StoreContext } from "common/contexts/StoreContext";
 
 interface GenpdfProps {
@@ -11,6 +11,7 @@ const Genpdf: React.FC<GenpdfProps> = ({ docs }) => {
   const [selectedPrename, setSelectedPrename] = useState<string | null>(null);
   const [selectedMajor, setSelectedMajor] = useState<string | null>(null);
   const [selectedYear, setSelectedYear] = useState<string | null>(null);
+  const [disabled, setDisabled] = useState(true); // Initialize as true
 
   //  major and years options
   const majorOptions = [
@@ -24,7 +25,7 @@ const Genpdf: React.FC<GenpdfProps> = ({ docs }) => {
     "วิศวกรรมคอมพิวเตอร์",
     "วิศวกรรมหุ่นยนต์และปัญญาประดิษฐ์",
     "วิศวกรรมบูรณาการ",
-    "วิศวกรรมระบบสารสนเทศและเครือข่าย",
+    "วิศวกรรมระบบสารสนเทศและเครือข่าย (หลักสูตรนานาชาติ)",
     "วิศวกรรมอุตสาหการและการจัดการโลจิสติกส์"
   ];
   const yearOptions = ["1", "2", "3", "4", "5", "6", "7", "8"];
@@ -233,8 +234,12 @@ const Genpdf: React.FC<GenpdfProps> = ({ docs }) => {
     }
   };
 
+  useEffect(() => {
+    setDisabled(!selectedMajor || !selectedPrename || !selectedYear);
+  }, [selectedMajor, selectedPrename, selectedYear]);
+
   return (
-    <div style={container}>
+    <div style={container_form}>
       <div>
         <div style={topic}>{docs}</div>
         <label>หนังสือรับรองฉบับนี้ให้ไว้เพื่อแสดงว่า </label>
@@ -289,7 +294,7 @@ const Genpdf: React.FC<GenpdfProps> = ({ docs }) => {
         </select>
         <br />
         <label>คณะวิศวกรรมศาสตร์ มหาวิทยาลัยเชียงใหม่</label>
-        <button style={buttonStyle} onClick={printHandler}>
+        <button style={disabled ? disabledButtonStyle : buttonStyle} onClick={printHandler} disabled={!selectedMajor || !selectedPrename || !selectedYear}>
           Print
         </button>
       </div>
@@ -322,14 +327,20 @@ const buttonStyle = {
   color: "#FFFFFF",
   display: "flex",
   padding: "10px 0px 10px 0px",
-  margin: "20px",
+  margin: "20px auto",
   justifyContent: "center",
   alignItems: "center",
   gap: "10px",
   width: "150px"
 };
 
-const container = {
+const disabledButtonStyle = {
+  ...buttonStyle,
+  background: "#B0B0B0", // Grey color for disabled state
+  cursor: "not-allowed", // Change cursor for disabled state
+};
+
+const container_form = {
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
@@ -337,7 +348,8 @@ const container = {
   border: "1px solid #FFD9DE",
   background: "#FFFFFF",
   width: "500px",
-  padding: "10px 30px 10px 30px"
+  padding: "10px 30px 10px 30px",
+  margin:"50px auto"
 };
 
 const topic = {
@@ -346,9 +358,9 @@ const topic = {
   justifyContent: "center",
   borderRadius: "10px 10px 0px 0px",
   borderBottom: "1px solid var(--cert-0-r, #FFD9DE)",
-
   background:
     "var(--gra2-R, linear-gradient(90deg, rgba(255, 255, 255, 0.20) -1.24%, rgba(249, 233, 235, 0.20) 69.32%), #FFF)",
   padding: "10px 0px 20px 0px",
-  margin: "0px 0px 30px 0px"
+  margin: "auto auto 30px auto"
 };
+

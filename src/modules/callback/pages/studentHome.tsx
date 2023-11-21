@@ -11,18 +11,21 @@ function StudentHome() {
   ];
 
   return (
-    <div className="body">
-      <p className=" mt-56">ขอใบคำขอ</p>
-      <select onChange={(e) => setSelectedDoc(e.target.value)} style={dropdown}>
-        <option value="">Select</option>
-        {docOptions.map((prenames, index) => (
-          <option key={index} value={prenames}>
-            {prenames}
-          </option>
-        ))}
-      </select>
-      {selectedDoc !== null && selectedDoc !== "" && <Genpdf docs={selectedDoc} />}
+    <div style={container_form}>
+            <div className="body">
+        <p className=" mt-56">ขอใบคำขอ</p>
+        <select onChange={(e) => setSelectedDoc(e.target.value)} style={dropdown}>
+          <option value="">Select</option>
+          {docOptions.map((prenames, index) => (
+            <option key={index} value={prenames}>
+              {prenames}
+            </option>
+          ))}
+        </select>
+        {selectedDoc !== null && selectedDoc !== "" && <Genpdf docs={selectedDoc} />}
+      </div>
     </div>
+
   );
 }
 
@@ -32,5 +35,13 @@ const dropdown = {
   borderRadius: "5px",
   border: "1px solid var(--white-gray-6-gray, #E1E1E1)",
   background: "#FFF",
+  width: "500px",
   color: "#838383"
+};
+
+const container_form = {
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  margin:"-30px auto"
 };
