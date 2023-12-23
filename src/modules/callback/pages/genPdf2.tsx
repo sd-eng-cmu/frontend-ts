@@ -243,7 +243,10 @@ const Genpdf2: React.FC<GenpdfProps> = ({ docs }) => {
   }, [selectedMajor, selectedPrename, selectedYear]);
 
   return (
+    <div>
+    
     <div style={container_form}>
+      
       <div>
         <div style={topic}>{docs}</div>
         <label>หนังสือรับรองฉบับนี้ให้ไว้เพื่อแสดงว่า </label>
@@ -302,6 +305,7 @@ const Genpdf2: React.FC<GenpdfProps> = ({ docs }) => {
           Print
         </button>
       </div>
+    </div>
     </div>
   );
 };

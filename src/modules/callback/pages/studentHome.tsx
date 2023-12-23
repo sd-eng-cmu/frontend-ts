@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import Genpdf from "./genPdf";
 import Genpdf2 from "./genPdf2";
 
@@ -11,18 +11,54 @@ function StudentHome() {
     "ใบคำขอทั่วไป"
   ];
 
+  const handleButtonClick = (doc: string) => {
+    setSelectedDoc(doc);
+  };
+
+  // Explicitly define the type for buttonStyle
+  const buttonStyle: React.CSSProperties = {
+    borderRadius: "10px",
+    width: "500px",
+    border: "1px solid #FFD9DE",
+    padding: "0px 0px",
+    marginTop: "16px",
+    cursor: "pointer",
+    color: "#000",
+    background: "var(--gra2-R, linear-gradient(90deg, rgba(255, 255, 255, 0.20) -1.24%, rgba(249, 233, 235, 0.20) 69.32%), #FFF)",
+    boxShadow: "0px 2px 5px 0px rgba(0, 0, 0, 0.05)",
+    textAlign: "left",
+    display: "flex",
+    alignItems: "center",
+  };
+
+  const rectangleStyle = {
+    width: "10px",
+    height: "54px",
+    margin: "0px 24px 0px 0px",
+    flexShrink: 0,
+    borderRadius: "10px 0px 0px 10px",
+    background: "var(--Cert-5-R, #AE0218)",
+  };
+
   return (
     <div style={container_form}>
       <div className="body">
-        <p className=" mt-56">ขอใบคำขอ</p>
-        <select onChange={(e) => setSelectedDoc(e.target.value)} style={dropdown}>
-          <option value="">Select</option>
-          {docOptions.map((prenames, index) => (
-            <option key={index} value={prenames}>
-              {prenames}
-            </option>
+        <h5 style={{marginTop: "6rem"}}>ขอใบคำขอ</h5>
+        <div>
+          {docOptions.map((doc, index) => (
+            <button
+              key={index}
+              style={{
+                ...buttonStyle,
+                background: selectedDoc === doc ? "rgba(255, 222, 222, 0.5)" : "#FFF",
+              }}
+              onClick={() => handleButtonClick(doc)}
+            >
+              <div style={rectangleStyle}></div>
+              {doc}
+            </button>
           ))}
-        </select>
+        </div>
         {selectedDoc !== null && selectedDoc !== "" && (
           selectedDoc === "หนังสือรับรองความประพฤติ" ? (
             <Genpdf2 docs={selectedDoc} />
@@ -35,19 +71,11 @@ function StudentHome() {
   );
 }
 
-export default StudentHome;
-
-const dropdown = {
-  borderRadius: "5px",
-  border: "1px solid var(--white-gray-6-gray, #E1E1E1)",
-  background: "#FFF",
-  width: "500px",
-  color: "#838383"
-};
-
 const container_form = {
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  margin:"-30px auto"
+  marginTop: "20px"
 };
+
+export default StudentHome;

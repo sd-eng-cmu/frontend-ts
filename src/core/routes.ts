@@ -5,6 +5,7 @@ import OAuthPage from "modules/callback/pages/OAuthPage";
 import HomePage from "modules/home/pages/HomePage";
 import LoginPage from "modules/login/pages/LoginPage";
 import RootPage from "modules/root/pages/RootPage";
+import DocPage from "modules/home/pages/DocPage";
 
 const routes = [
   {
@@ -18,6 +19,11 @@ const routes = [
   {
     path: ClientRouteKey.Home,
     component: withAuth(AuthKey.UserAuth)(HomePage),
+    loading: true
+  },
+  {
+    path: ClientRouteKey.Doc,
+    component: withAuth(AuthKey.UserAuth)(DocPage),
     loading: true
   },
   {

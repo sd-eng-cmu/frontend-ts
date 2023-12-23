@@ -3,7 +3,8 @@ export const enum ClientRouteKey {
   Login = "/login",
   Home = "/home",
   OAuth = "/callback",
-  Wildcard = "*"
+  Wildcard = "*",
+  Doc = "/doc"
 }
 
 export const enum ApiRouteKey {
@@ -19,3 +20,5 @@ export const enum LocalStorageKey {
 export const enum AuthKey {
   UserAuth = "user-auth"
 }
+
+
