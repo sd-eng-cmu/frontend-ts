@@ -33,7 +33,16 @@ h1{
   min-height: 100vh;
 }
 h2,
-h3,
+h3{
+  color: var(--Blue-10-b, #000);
+
+/* prg light reg 16 */
+font-family: Prompt;
+font-size: 16px;
+font-style: light;
+font-weight: 250;
+line-height: 25.5px; /* 159.375% */
+}
 h4{
   color: var(--Blue-10-b, #000);
 
