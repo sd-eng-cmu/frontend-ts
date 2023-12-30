@@ -1,9 +1,16 @@
-import React, { useState } from "react";
+import React, {  useState } from "react";
 import Genpdf from "./genPdf";
 import Genpdf2 from "./genPdf2";
+// Import the CSS file
+import "./uploading.css";
+import FileUpload from "./FileUpload";
+import ImgUpload from "./ImgUpload";
 
 function StudentHome() {
   const [selectedDoc, setSelectedDoc] = useState<string | null>(null);
+  const [uploadedFiles, setUploadedFiles] = useState<File[]>([]); // Updated to use File[]
+  const [uploadedPictures, setUploadedPictures] = useState<File[]>([]);
+
   const docOptions = [
     "หนังสือรับรองความประพฤติ",
     "หนังสือรับรองการเป็นนักศึกษา",
@@ -11,8 +18,28 @@ function StudentHome() {
     "ใบคำขอทั่วไป"
   ];
 
+
   const handleButtonClick = (doc: string) => {
     setSelectedDoc(doc);
+  };
+
+  const handleFileUpload = (files: FileList) => {
+    setUploadedFiles((prevFiles) => [...prevFiles, ...Array.from(files)]);
+  };
+
+  const handlePictureUpload = (files: FileList) => {
+    const validPictures = Array.from(files).filter((pic) => pic.size <= 25 * 1024 * 1024);
+    setUploadedPictures((prevPictures) => [...prevPictures, ...validPictures]);
+  };
+
+  const handleDeleteFile = (index: number) => {
+    setUploadedFiles((prevFiles) => prevFiles.filter((_, i) => i !== index));
+  };
+
+  const handleDeletePicture = (index: number) => {
+    setUploadedPictures((prevPictures) =>
+      prevPictures.filter((_, i) => i !== index)
+    );
   };
 
   // Explicitly define the type for buttonStyle
@@ -43,33 +70,83 @@ function StudentHome() {
   return (
     <div style={container_form}>
       <div className="body">
-        <h5 style={{marginTop: "6rem"}}>ขอใบคำขอ</h5>
+        <h5 style={{ marginTop: "6rem" }}>ขอใบคำขอ</h5>
         <div>
+        
+          
+
+
+
           {docOptions.map((doc, index) => (
             <button
-              key={index}
-              style={{
-                ...buttonStyle,
-                background: selectedDoc === doc ? "rgba(255, 222, 222, 0.5)" : "#FFF",
-              }}
-              onClick={() => handleButtonClick(doc)}
-            >
-              <div style={rectangleStyle}></div>
-              {doc}
-            </button>
+            key={index}
+            style={{
+              ...buttonStyle,
+              background: selectedDoc === doc ? "rgba(255, 222, 222, 0.5)" : "#FFF",
+            }}
+            onClick={() => handleButtonClick(doc)}
+          >
+            <div style={rectangleStyle}></div>
+            {doc}
+          </button>
           ))}
         </div>
         {selectedDoc !== null && selectedDoc !== "" && (
           selectedDoc === "หนังสือรับรองความประพฤติ" ? (
+            
             <Genpdf2 docs={selectedDoc} />
           ) : (
             <Genpdf docs={selectedDoc} />
           )
         )}
+              <div>
+        {selectedDoc && (
+          <>
+              <FileUpload onFileUpload={handleFileUpload} accept=".pdf" />
+            </>          
+            )}
+          {uploadedFiles.length > 0 && (
+            <div>
+                <ul style={{ borderRadius: '5px', background: 'var(--white-2-Gray, #F5F5F5)' }}>
+                  {uploadedFiles.map((file, index) => (
+                  <li key={index} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <span style={{margin:'5px'}}>{file.name}</span>
+                  <button style={{margin:'5px',width:'100px',borderRadius: '5px', marginLeft: 'auto', color: 'white', background: '#BE2D40' }} onClick={() => handleDeleteFile(index)}>
+                  Delete
+                  </button>
+                  </li>
+                  ))}
+                </ul>
+            </div>
+          )}
+          {selectedDoc && (
+          <>
+              <ImgUpload onFileUpload={handlePictureUpload} accept="image/jpeg, image/png" />
+            </>          
+            )}
+
+          {uploadedPictures.length > 0 && (
+            <div>
+              <ul style={{ borderRadius: '5px', background: 'var(--white-2-Gray, #F5F5F5)' }}>
+                {uploadedPictures.map((pic, index) => (
+                  <li key={index} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <span style={{margin:'5px'}}>{pic.name}</span>
+                    <button style={{margin:'5px',width:'100px',borderRadius: '5px', marginLeft: 'auto', color: 'white', background: '#BE2D40' }} onClick={() => handleDeletePicture(index)}>
+                  Delete
+                  </button>                  
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
       </div>
+      </div>
+
     </div>
+    
   );
 }
+
 
 const container_form = {
   display: "flex",
@@ -77,5 +154,6 @@ const container_form = {
   justifyContent: "center",
   marginTop: "20px"
 };
+
 
 export default StudentHome;
