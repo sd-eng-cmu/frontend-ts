@@ -84,7 +84,7 @@ const Genpdf2: React.FC<GenpdfProps> = ({ docs }) => {
         .container {
           text-align: center;
           margin-top: 40px;
-          margin-left: 20px;
+          margin-left: 8px;
           
         }
 

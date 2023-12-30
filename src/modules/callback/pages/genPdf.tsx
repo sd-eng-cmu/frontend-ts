@@ -84,7 +84,7 @@ const Genpdf: React.FC<GenpdfProps> = ({ docs }) => {
         .container {
           text-align: center;
           margin-top: 40px;
-          margin-left: 20px;
+          margin-left: 8px;
           
         }
 
@@ -241,6 +241,7 @@ const Genpdf: React.FC<GenpdfProps> = ({ docs }) => {
   return (
     <div style={container_form}>
       <div>
+        
         <div style={topic}>{docs}</div>
         <label>หนังสือรับรองฉบับนี้ให้ไว้เพื่อแสดงว่า </label>
         <br />
