@@ -1,10 +1,11 @@
 import React, {  useState } from "react";
 import Genpdf from "./genPdf";
 import Genpdf2 from "./genPdf2";
-// Import the CSS file
-import "./uploading.css";
+import "./uploading.css"; 
 import FileUpload from "./FileUpload";
 import ImgUpload from "./ImgUpload";
+import TextBox from "./textbox";
+
 
 function StudentHome() {
   const [selectedDoc, setSelectedDoc] = useState<string | null>(null);
@@ -42,6 +43,11 @@ function StudentHome() {
     );
   };
 
+  const handleTextChange = (text: string) => {
+    // Do something with the entered text, if needed
+    console.log("Entered text:", text);
+  };
+
   // Explicitly define the type for buttonStyle
   const buttonStyle: React.CSSProperties = {
     borderRadius: "10px",
@@ -72,11 +78,6 @@ function StudentHome() {
       <div className="body">
         <h5 style={{ marginTop: "6rem" }}>ขอใบคำขอ</h5>
         <div>
-        
-          
-
-
-
           {docOptions.map((doc, index) => (
             <button
             key={index}
@@ -107,7 +108,7 @@ function StudentHome() {
             )}
           {uploadedFiles.length > 0 && (
             <div>
-                <ul style={{ borderRadius: '5px', background: 'var(--white-2-Gray, #F5F5F5)' }}>
+                <ul style={{ fontWeight:'300',borderRadius: '5px', background: 'var(--white-2-Gray, #F5F5F5)' }}>
                   {uploadedFiles.map((file, index) => (
                   <li key={index} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   <span style={{margin:'5px'}}>{file.name}</span>
@@ -127,7 +128,7 @@ function StudentHome() {
 
           {uploadedPictures.length > 0 && (
             <div>
-              <ul style={{ borderRadius: '5px', background: 'var(--white-2-Gray, #F5F5F5)' }}>
+              <ul style={{ fontWeight:'300',borderRadius: '5px', background: 'var(--white-2-Gray, #F5F5F5)' }}>
                 {uploadedPictures.map((pic, index) => (
                   <li key={index} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   <span style={{margin:'5px'}}>{pic.name}</span>
@@ -139,6 +140,9 @@ function StudentHome() {
               </ul>
             </div>
           )}
+          {selectedDoc && (
+          <TextBox onTextChange={handleTextChange} /> )}
+
       </div>
       </div>
 
