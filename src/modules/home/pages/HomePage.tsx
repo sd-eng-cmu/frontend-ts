@@ -25,13 +25,13 @@ function HomePage() {
     navigate(ClientRouteKey.Login);
   }
   return (
-    <div className="flex ml-64 p-12 flex-col bg-slate-600 h-full w-full">
+    <div className="flex ml-64 pl-12 pr-12 pt-7 flex-col  h-full w-full pb-10">
       {/* {store.userData?.type === "MISEmpAcc" ? <StaffHome /> : <StudentHome />} */}
       <StudentHome />
       {/* <StaffHome /> */}
-      <button className=" mt-52" onClick={() => handleLogout()}>
+      {/* <button className=" mt-52" onClick={() => handleLogout()}>
         Logout
-      </button>
+      </button> */}
     </div>
   );
 }

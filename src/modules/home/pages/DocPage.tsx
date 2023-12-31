@@ -53,9 +53,6 @@ function DocPage() {
       <span className="text-wrapper">แนบรูปถ่าย </span>
       <span style={{ color: "#6B6B6B" }} className="span">(ไฟล์ .png, .jpg สัดส่วน 3:4 และขนาดไม่เกิน 5MB)</span>
       </h3>
-      <button className=" mt-52" onClick={() => handleLogout()}>
-        Logout
-      </button>
     </div>
   );
 }

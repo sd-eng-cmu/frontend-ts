@@ -49,14 +49,12 @@ function App() {
     <StoreContext.Provider value={storeValue}>
       <Toaster />
       <Navbar />
-      <div className="flex h-screen w-screen">
-        <Sidebar />
-  
+      <div className=" flex w-full">
+        <Sidebar/>
         <FixedLayer>
           <DebugPanel isDisplayed={!config.isProductionMode} routes={routes} />
           <AppPageLoader isLoading={status === "loading"} />
         </FixedLayer>
-  
         {status === "loading" ? null : status === "success" ? (
           <Routes>
             {routes.map(({ path, component: Component, loading = false }) => (
@@ -83,7 +81,6 @@ function App() {
       </div>
     </StoreContext.Provider>
   );
-  
 }
 
 export default App;
