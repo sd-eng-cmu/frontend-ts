@@ -6,6 +6,7 @@ import HomePage from "modules/home/pages/HomePage";
 import LoginPage from "modules/login/pages/LoginPage";
 import RootPage from "modules/root/pages/RootPage";
 import DocPage from "modules/home/pages/DocPage";
+import StaffHomePage from "modules/callback/pages/staffHome";
 
 const routes = [
   {
@@ -15,6 +16,11 @@ const routes = [
   {
     path: ClientRouteKey.Login,
     component: LoginPage
+  },
+  {
+    path: ClientRouteKey.StaffHome,
+    component: withAuth(AuthKey.UserAuth)(StaffHomePage),
+    loading: true
   },
   {
     path: ClientRouteKey.Home,
@@ -35,6 +41,7 @@ const routes = [
     path: ClientRouteKey.Wildcard,
     component: NotFound
   }
+
 ];
 
 export default routes;

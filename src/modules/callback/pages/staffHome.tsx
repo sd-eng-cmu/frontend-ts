@@ -1,9 +1,9 @@
 function StaffHome() {
-    return (
-      <div className="body">
-        <p className=" mt-56">this is StaffHome</p>
-      </div>
-    );
-  }
-  
-  export default StaffHome;
+  return (
+    <div className="w-full h-full flex-1 bg-slate-400">
+    <div>jjjjjjjj</div>
+    </div>
+  );
+}
+
+export default StaffHome;

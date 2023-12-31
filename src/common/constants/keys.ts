@@ -4,7 +4,8 @@ export const enum ClientRouteKey {
   Home = "/home",
   OAuth = "/callback",
   Wildcard = "*",
-  Doc = "/doc"
+  Doc = "/doc",
+  StaffHome = "/staffhome"
 }
 
 export const enum ApiRouteKey {

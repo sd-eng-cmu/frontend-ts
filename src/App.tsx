@@ -17,6 +17,7 @@ import { useQuery } from "react-query";
 import { Navigate, useNavigate } from "react-router-dom";
 import { Routes, Route } from "react-router-loading";
 import Navbar from "components/navbar";
+import Sidebar from "components/sidebar";
 function App() {
   const navigate = useNavigate();
 
@@ -48,35 +49,41 @@ function App() {
     <StoreContext.Provider value={storeValue}>
       <Toaster />
       <Navbar />
-      <FixedLayer>
-        <DebugPanel isDisplayed={!config.isProductionMode} routes={routes} />
-        <AppPageLoader isLoading={status === "loading"} />
-      </FixedLayer>
-      {status === "loading" ? null : status === "success" ? (
-        <Routes>
-          {routes.map(({ path, component: Component, loading = false }) => (
-            <Route
-              key={path}
-              path={path}
-              element={
-                <ErrorBoundary
-                  fallback={
-                    <div>Something went wrong. please refresh the page.</div>
-                  }
-                  onError={handleError}
-                >
-                  <Component />
-                </ErrorBoundary>
-              }
-              loading={loading}
-            />
-          ))}
-        </Routes>
-      ) : (
-        <Navigate to={ClientRouteKey.Login} replace={true} />
-      )}
+      <div className="flex h-screen w-screen">
+        <Sidebar />
+  
+        <FixedLayer>
+          <DebugPanel isDisplayed={!config.isProductionMode} routes={routes} />
+          <AppPageLoader isLoading={status === "loading"} />
+        </FixedLayer>
+  
+        {status === "loading" ? null : status === "success" ? (
+          <Routes>
+            {routes.map(({ path, component: Component, loading = false }) => (
+              <Route
+                key={path}
+                path={path}
+                element={
+                  <ErrorBoundary
+                    fallback={
+                      <div>Something went wrong. Please refresh the page.</div>
+                    }
+                    onError={handleError}
+                  >
+                    <Component />
+                  </ErrorBoundary>
+                }
+                loading={loading}
+              />
+            ))}
+          </Routes>
+        ) : (
+          <Navigate to={ClientRouteKey.Login} replace={true} />
+        )}
+      </div>
     </StoreContext.Provider>
   );
+  
 }
 
 export default App;

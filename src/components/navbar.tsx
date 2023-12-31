@@ -32,7 +32,7 @@ const Navbar: React.FC = () => {
   };
 
   return (
-    <nav className="flex w-full fixed justify-between items-center top-0 py-2 drop-shadow-lg bg-white px-3 lg:px-10 md:px-8 z-50">
+    <nav className="flex w-full sticky justify-between items-center top-0 py-2 drop-shadow-lg bg-white px-3 lg:px-10 md:px-8 z-50">
       <div className="flex items-center gap-2 md:gap-4">
         <img
           src={engLogo}

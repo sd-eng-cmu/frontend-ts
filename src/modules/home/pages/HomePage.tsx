@@ -25,8 +25,10 @@ function HomePage() {
     navigate(ClientRouteKey.Login);
   }
   return (
-    <div>
-      {store.userData?.type === "MISEmpAcc" ? <StaffHome /> : <StudentHome />}
+    <div className="flex ml-64 p-12 flex-col bg-slate-600 h-full w-full">
+      {/* {store.userData?.type === "MISEmpAcc" ? <StaffHome /> : <StudentHome />} */}
+      <StudentHome />
+      {/* <StaffHome /> */}
       <button className=" mt-52" onClick={() => handleLogout()}>
         Logout
       </button>
