@@ -1,47 +1,85 @@
 import { StoreContext } from "common/contexts/StoreContext";
 import { Button } from "primereact/button";
-import { useContext } from "react";
+import { useContext, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 function Sidebar() {
-  const [{ userData }, setStore] = useContext(StoreContext);
+  const [{ userData }] = useContext(StoreContext);
+  const { pathname } = useLocation();
+  const [isHovered, setIsHovered] = useState(false);
+  const [isHovered2, setIsHovered2] = useState(false);
+  const [isHovered3, setIsHovered3] = useState(false);
+  if (pathname === "/login") return null;
   return (
-    <div className="fixed flex w-64 justify-items-center justify-center h-screen shadow bg-slate-400">
-      {/* {userData?.type === "MISEmpAcc" && ( */ }
-        {/* {(<div className="flex-col w-full space-y-5 items-center gap-2 pl-3 pr-3 pt-9">
+    <div className="fixed flex w-64 justify-items-center bg-[#fffefe] justify-center h-screen drop-shadow-xl ">
+      {/* {userData?.type === "MISEmpAcc" && ( */}
+      {/* {(<div className="space-y-3 fixed gap-2 pl-3 pr-3 pt-9">
           <Button
             link
-            className="text-black bg-slate-300 rounded-xl h-10 flex items-center justify-center menu-ho outline-none"
+            className="text-black bg-red rounded-xl py-2 w-52 flex"
             label="รายการใบคำขอ"
-            v-if="$route.path !== '/searchfile' && $route.path !== '/uploadfile'"
           ></Button>
           <Button
             link
-            className="text-black bg-red rounded-xl w-full items-center justify-center menu-ho outline-none"
+            className="text-black bg-red rounded-xl py-2 w-52 flex"
             label="ตั้งค่าเอกสาร"
-            v-if="$route.path !== '/searchfile' && $route.path !== '/uploadfile'"
           ></Button>
         </div> */}
       {/* )} */}
 
       {userData?.type === "StdAcc" && (
-        <div className=" space-y-5 fixed gap-2 pl-3 pr-3 pt-9">
+        <div className=" space-y-3 fixed gap-2 pl-3 pr-3 pt-9 ">
+          <Button
+            className={`text-black rounded-xl w-52 py-2 flex`}
+            label="ขอใบคำขอ"
+            link
+            style={{
+              backgroundColor: isHovered
+                ? "#8B0213"
+                : location.pathname === "/home"
+                ? "#B91A2F"
+                : "",
+              color: location.pathname === "/home" ? "#ffffff" : "#000000"
+            }}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+          ></Button>
+
           <Button
             link
-            className="text-black bg-red rounded-xl w-full flex  menu-ho outline-none"
+            className="text-black bg-white rounded-xl py-2 w-52 flex "
             label="รายการใบคำขอ"
-            v-if="$route.path !== '/searchfile' && $route.path !== '/uploadfile'"
+            style={{
+              backgroundColor: isHovered2
+                ? "#B91A2F"
+                : location.pathname === "/home"
+                ? "#ffffff"
+                : "",
+              color:
+                location.pathname === "/home" && !isHovered2
+                  ? "#000000"
+                  : "#ffffff"
+            }}
+            onMouseEnter={() => setIsHovered2(true)}
+            onMouseLeave={() => setIsHovered2(false)}
           ></Button>
           <Button
             link
-            className="text-black bg-red rounded-xl w-full flex menu-ho outline-none"
-            label="ขอเอกสาร"
-            v-if="$route.path !== '/searchfile' && $route.path !== '/uploadfile'"
-          ></Button>
-          <Button
-            link
-            className="text-black bg-red rounded-xl w-full flex items-center justify-center menu-ho outline-none"
+            className="text-black bg-white rounded-xl py-2 w-52 flex"
             label="ประวัติการขอ"
-            v-if="$route.path !== '/searchfile' && $route.path !== '/uploadfile'"
+            style={{
+              backgroundColor: isHovered3
+                ? "#B91A2F"
+                : location.pathname === "/home"
+                ? "#ffffff"
+                : "",
+              color:
+                location.pathname === "/home" && !isHovered3
+                  ? "#000000"
+                  : "#ffffff"
+            }}
+            onMouseEnter={() => setIsHovered3(true)}
+            onMouseLeave={() => setIsHovered3(false)}
           ></Button>
         </div>
       )}

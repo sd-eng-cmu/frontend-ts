@@ -5,6 +5,7 @@ import "./uploading.css";
 import FileUpload from "./FileUpload";
 import ImgUpload from "./ImgUpload";
 import TextBox from "./TextBox";
+import { Button } from "primereact/button";
 
 function StudentHome() {
   const [selectedDoc, setSelectedDoc] = useState<string | null>(null);
@@ -75,9 +76,11 @@ function StudentHome() {
   };
 
   return (
-    <div style={container_form}>
-      <div className="body">
-        <h5 style={{ marginTop: "6rem" }}>ขอใบคำขอ</h5>
+    <div
+      className="flex justify-center w-full h-full"
+    >
+      <div>
+        <h5>ขอใบคำขอ</h5>
         <div>
           {docOptions.map((doc, index) => (
             <button
@@ -187,8 +190,11 @@ function StudentHome() {
                     </button>
                   </li>
                 ))}
+                <Button
+                label="fffff"></Button>
               </ul>
             </div>
+
           )}
           {selectedDoc && <TextBox onTextChange={handleTextChange} />}
         </div>
@@ -197,10 +203,5 @@ function StudentHome() {
   );
 }
 
-const container_form = {
-  display: "flex",
-
-  marginTop: "20px"
-};
 
 export default StudentHome;
