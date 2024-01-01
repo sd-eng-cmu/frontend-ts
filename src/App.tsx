@@ -50,7 +50,7 @@ function App() {
       <Toaster />
       <Navbar />
       <div className=" flex w-full">
-        <Sidebar/>
+        <Sidebar />
         <FixedLayer>
           <DebugPanel isDisplayed={!config.isProductionMode} routes={routes} />
           <AppPageLoader isLoading={status === "loading"} />

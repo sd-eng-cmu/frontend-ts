@@ -51,12 +51,12 @@ function OAuthPage() {
         setTimeout(() => navigate(ClientRouteKey.Login), 1);
       } else {
         const res = (await mutateAsyncLoginValidation(code)) as unknown as {
-          payload: string;
+          result: string;
         };
 
         const data = await mutateAsyncUserData();
 
-        localStorage.setItem(LocalStorageKey.Auth, res.payload);
+        localStorage.setItem(LocalStorageKey.Auth, res.result);
         setStore(writePartialStore({ userData: data.userData }));
         navigate(ClientRouteKey.Home);
       }

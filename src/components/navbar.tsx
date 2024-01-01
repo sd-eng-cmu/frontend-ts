@@ -13,7 +13,7 @@ const Navbar: React.FC = () => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
 
-  if (pathname === "/login") return null;
+  // if (pathname === "/login") return null;
 
   const [isProfileMenuOpen, setProfileMenuOpen] = useState(false);
   const [isProfileButtonActive, setProfileButtonActive] = useState(false);
@@ -29,6 +29,8 @@ const Navbar: React.FC = () => {
     localStorage.removeItem(LocalStorageKey.Auth);
     navigate(ClientRouteKey.Login);
   };
+
+  if (pathname === "/login") return null;
 
   return (
     <nav className="flex w-full sticky justify-between items-center top-0 py-2 drop-shadow-lg bg-white px-3 lg:px-10 md:px-8 z-50">

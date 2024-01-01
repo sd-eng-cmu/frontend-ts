@@ -10,8 +10,8 @@ export const enum ClientRouteKey {
 
 export const enum ApiRouteKey {
   OAuth = "/oauth",
-  MyData = "/user/me",
-  SignOut = "/user/signout"
+  MyData = "/oauth/me",
+  SignOut = "/oauth/signout"
 }
 
 export const enum LocalStorageKey {
@@ -21,5 +21,3 @@ export const enum LocalStorageKey {
 export const enum AuthKey {
   UserAuth = "user-auth"
 }
-
-

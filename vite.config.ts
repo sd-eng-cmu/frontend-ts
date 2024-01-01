@@ -24,9 +24,9 @@ export default defineConfig(({ command, mode }) => {
   loadEnv(mode);
 
   return {
-    build: {
-      sourcemap: true
-    },
+    // build: {
+    //   sourcemap: true
+    // },
     define: {
       IS_PRODUCTION_MODE: `${!isDevelopmentMode}`,
       API_ENDPOINT_URL: `"${process.env["API_ENDPOINT_URL"]}"`,
