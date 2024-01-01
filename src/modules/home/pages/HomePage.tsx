@@ -12,7 +12,7 @@ function HomePage() {
   });
 
   return (
-    <div className="flex ml-64 pl-12 pr-12 pt-7 flex-col  h-full w-full pb-10">
+    <div className="flex ml-52 pr-12 pt-7 flex-col  h-full w-full pb-10">
       {/* {store.userData?.type === "MISEmpAcc" ? <StaffHome /> : <StudentHome />} */}
       <StudentHome />
       {/* <StaffHome /> */}
