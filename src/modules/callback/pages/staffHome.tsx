@@ -7,7 +7,6 @@ import { Button } from "primereact/button";
 import "primeicons/primeicons.css";
 import Checkdoc from "components/checkDoc";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 function Staffhome() {
   const loadingContext = useLoadingContext();

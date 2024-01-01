@@ -2,14 +2,12 @@ import { getLogout } from "common/apis/logout";
 import { ClientRouteKey, LocalStorageKey } from "common/constants/keys";
 import { StoreContext, writePartialStore } from "common/contexts/StoreContext";
 import { noop } from "lodash-es";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { useLoadingContext } from "react-router-loading";
 import StudentHome from "modules/callback/pages/studentHome";
-import StaffHome from "modules/callback/pages/staffHome";
-import { Checkbox } from "primereact/checkbox";
-import Checkdoc from "components/checkDoc";
+
 
 
 function HomePage() {
