@@ -4,6 +4,7 @@ import ReactDOM from "react-dom/client";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { BrowserRouter } from "react-router-dom";
 import { PrimeReactProvider, PrimeReactContext } from "primereact/api";
+import "primereact/resources/themes/mdc-light-deeppurple/theme.css";
 
 import App from "./App";
 

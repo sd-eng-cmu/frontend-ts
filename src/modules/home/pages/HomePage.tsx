@@ -2,12 +2,15 @@ import { getLogout } from "common/apis/logout";
 import { ClientRouteKey, LocalStorageKey } from "common/constants/keys";
 import { StoreContext, writePartialStore } from "common/contexts/StoreContext";
 import { noop } from "lodash-es";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { useLoadingContext } from "react-router-loading";
 import StudentHome from "modules/callback/pages/studentHome";
 import StaffHome from "modules/callback/pages/staffHome";
+import { Checkbox } from "primereact/checkbox";
+import Checkdoc from "components/checkDoc";
+
 
 function HomePage() {
   const [store, setStore] = useContext(StoreContext);
@@ -24,14 +27,14 @@ function HomePage() {
     localStorage.removeItem(LocalStorageKey.Auth);
     navigate(ClientRouteKey.Login);
   }
+
+
   return (
-    <div className="flex ml-64 pl-12 pr-12 pt-7 flex-col  h-full w-full pb-10">
+    <div className="flex ml-52 pr-12 pt-7 flex-col  h-full w-full pb-10">
       {/* {store.userData?.type === "MISEmpAcc" ? <StaffHome /> : <StudentHome />} */}
       <StudentHome />
       {/* <StaffHome /> */}
-      {/* <button className=" mt-52" onClick={() => handleLogout()}>
-        Logout
-      </button> */}
+
     </div>
   );
 }
