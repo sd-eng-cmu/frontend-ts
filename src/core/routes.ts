@@ -6,7 +6,8 @@ import HomePage from "modules/home/pages/HomePage";
 import LoginPage from "modules/login/pages/LoginPage";
 import RootPage from "modules/root/pages/RootPage";
 import DocPage from "modules/home/pages/DocPage";
-import StaffHomePage from "modules/callback/pages/staffHome";
+import StudentListPage from "modules/callback/pages/studentList";
+
 
 const routes = [
   {
@@ -18,13 +19,13 @@ const routes = [
     component: LoginPage
   },
   {
-    path: ClientRouteKey.StaffHome,
-    component: withAuth(AuthKey.UserAuth)(StaffHomePage),
+    path: ClientRouteKey.Home,
+    component: withAuth(AuthKey.UserAuth)(HomePage),
     loading: true
   },
   {
-    path: ClientRouteKey.Home,
-    component: withAuth(AuthKey.UserAuth)(HomePage),
+    path: ClientRouteKey.StudentList,
+    component: withAuth(AuthKey.UserAuth)(StudentListPage),
     loading: true
   },
   {
@@ -45,3 +46,4 @@ const routes = [
 ];
 
 export default routes;
+
