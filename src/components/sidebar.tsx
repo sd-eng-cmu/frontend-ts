@@ -9,7 +9,6 @@ function Sidebar() {
   const [isHovered, setIsHovered] = useState(false);
   const [isHovered2, setIsHovered2] = useState(false);
   const [isHovered3, setIsHovered3] = useState(false);
-  const [isHovered4, setIsHovered4] = useState(false);
   const navigate = useNavigate();
 
   if (pathname === "/login") return null;

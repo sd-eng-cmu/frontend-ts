@@ -1,4 +1,4 @@
-REMOTE_HOST=sd-eng@10.10.12.86
+REMOTE_HOST=sd-eng
 APP_NAME=sd-eng-frontend-ts
 
 build-deploy:

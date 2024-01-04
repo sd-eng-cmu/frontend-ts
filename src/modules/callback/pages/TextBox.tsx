@@ -1,4 +1,3 @@
-import { Button } from "primereact/button";
 import React, { useState, ChangeEvent } from "react";
 
 interface TextBoxProps {
@@ -7,7 +6,6 @@ interface TextBoxProps {
 
 const TextBox: React.FC<TextBoxProps> = ({ onTextChange }) => {
   const [text, setText] = useState<string>("");
-  const [isHovered, setIsHovered] = useState(false);
 
   const handleTextChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setText(event.target.value);
@@ -35,18 +33,9 @@ const TextBox: React.FC<TextBoxProps> = ({ onTextChange }) => {
           padding: "8px",
           paddingLeft: "15px",
           height: "auto",
-          overflow: "auto",
+          overflow: "auto"
         }}
       />
-      <Button
-        className={`mt-10 w-full h-full px-2 py-2 rounded-xl text-white ${
-          isHovered ? "hovered" : ""
-        }`}
-        label="ยืนยัน"
-        style={{ backgroundColor: isHovered ? "#8B0213" :  "#B91A2F" }}
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-      ></Button>
     </>
   );
 };
