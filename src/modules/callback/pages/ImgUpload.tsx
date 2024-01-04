@@ -32,9 +32,9 @@ const ImgUpload: React.FC<FileUploadProps> = ({ onFileUpload, accept, multiple }
     </div>
     <div style={{display: 'flex', alignItems: 'right',justifyContent:'right'}}>
       <img 
-        src="/images/imgExample.png"
-        alt="img Example"
-        style={{height:'170px' , width:'360px',margin:'10px'}}
+        src="/images/ImgExm.png"
+        alt="ImgExm"
+        style={{ width:'330px',margin:'10px'}}
       ></img>
       <div className="drag-drop-area-img" onClick={handleClick} style={{ display: 'flex', alignItems: 'center',justifyContent:'center',flexDirection: 'column' }}>
           <input
