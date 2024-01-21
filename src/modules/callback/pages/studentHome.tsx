@@ -23,6 +23,7 @@ function StudentHome() {
   const [store] = useContext(StoreContext);
   const [reason, setReason] = useState<string>("");
   const [docType, setDocType] = useState<TDocType>("Conduct");
+  const [currentPicture, setCurrentPicture] = useState<File | null>(null);
 
   const docOptions = [
     "หนังสือรับรองความประพฤติ",
@@ -40,20 +41,17 @@ function StudentHome() {
   };
 
   const handlePictureUpload = (files: FileList) => {
-    const validPictures = Array.from(files).filter(
-      (pic) => pic.size <= 25 * 1024 * 1024
-    );
-    setUploadedPictures((prevPictures) => [...prevPictures, ...validPictures]);
+      setCurrentPicture(files[0]);
+    setUploadedPictures((prevPictures) => [...prevPictures, ...Array.from(files)]);
   };
 
   const handleDeleteFile = (index: number) => {
     setUploadedFiles((prevFiles) => prevFiles.filter((_, i) => i !== index));
   };
 
-  const handleDeletePicture = (index: number) => {
-    setUploadedPictures((prevPictures) =>
-      prevPictures.filter((_, i) => i !== index)
-    );
+  const handleDeletePicture = () => {
+    setCurrentPicture(null);
+    setUploadedPictures([]);
   };
 
   const handleTextChange = (text: string) => {
@@ -137,7 +135,7 @@ function StudentHome() {
   return (
     <div className="flex justify-center w-full h-full">
       <div>
-        <h5>ขอใบคำขอ</h5>
+        <h5>ขอเอกสาร</h5>
         <div>
           {docOptions.map((doc, index) => (
             <button
@@ -185,7 +183,9 @@ function StudentHome() {
                       alignItems: "center"
                     }}
                   >
-                    <span style={{ margin: "5px" }}>{file.name}</span>
+                    <span style={{ margin: "5px" }}>
+                      {file.name} ({(file.size / 1024 / 1024).toFixed(2)} MB)
+                    </span>
                     <button
                       style={{
                         margin: "5px",
@@ -213,7 +213,31 @@ function StudentHome() {
             </>
           )}
 
-          {uploadedPictures.length > 0 && (
+          {currentPicture && (
+            <div>
+              <ul
+                style={{
+                  fontWeight: "300",
+                  borderRadius: "5px",
+                  background: "var(--white-2-Gray, #F5F5F5)"
+                }}
+              >
+                <li
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center"
+                  }}
+                >
+                  <span style={{ margin: "5px" }}>
+                    {currentPicture.name} ({(currentPicture.size / 1024 / 1024).toFixed(2)} MB)
+                  </span>
+                </li>
+              </ul>
+            </div>
+          )}
+
+          {uploadedPictures.length > 0 && !currentPicture && (
             <div>
               <ul
                 style={{
@@ -231,26 +255,15 @@ function StudentHome() {
                       alignItems: "center"
                     }}
                   >
-                    <span style={{ margin: "5px" }}>{pic.name}</span>
-                    <button
-                      style={{
-                        margin: "5px",
-                        width: "100px",
-                        borderRadius: "5px",
-                        marginLeft: "auto",
-                        color: "white",
-                        background: "#BE2D40"
-                      }}
-                      onClick={() => handleDeletePicture(index)}
-                    >
-                      Delete
-                    </button>
+                    <span style={{ margin: "5px" }}>
+                      {pic.name} ({(pic.size / 1024 / 1024).toFixed(2)} MB)
+                    </span>
                   </li>
                 ))}
-                <Button label="fffff"></Button>
               </ul>
             </div>
           )}
+
           {selectedDoc && <TextBox onTextChange={handleTextChange} />}
           {selectedDoc && (
             <Button
@@ -269,6 +282,6 @@ function StudentHome() {
       </div>
     </div>
   );
-}
+};
 
 export default StudentHome;

@@ -63,7 +63,7 @@ function Sidebar() {
           <Button
             onClick={() => navigate("/home")}
             className={`text-black rounded-xl w-52 py-2 flex`}
-            label="ขอใบคำขอ"
+            label="ขอเอกสาร"
             link
             style={{
               backgroundColor: isHovered
@@ -84,7 +84,7 @@ function Sidebar() {
             onClick={() => navigate("/studentList")}
             link
             className="text-black bg-white rounded-xl py-2 w-52 flex "
-            label="รายการใบคำขอ"
+            label="ประวัติการขอเอกสาร"
             style={{
               backgroundColor: isHovered2
                 ? "#8B0213"
@@ -100,7 +100,7 @@ function Sidebar() {
             onMouseLeave={() => setIsHovered2(false)}
           ></Button>
 
-          <Button
+          {/*<Button
             link
             className="text-black bg-white rounded-xl py-2 w-52 flex"
             label="ประวัติการขอ"
@@ -115,7 +115,7 @@ function Sidebar() {
             }}
             onMouseEnter={() => setIsHovered3(true)}
             onMouseLeave={() => setIsHovered3(false)}
-          ></Button>
+          ></Button>*/}
         </div>
       )}
     </div>

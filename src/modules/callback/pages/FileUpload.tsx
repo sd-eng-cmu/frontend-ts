@@ -35,10 +35,10 @@ const FileUpload: React.FC<FileUploadProps> = ({ onFileUpload, accept, multiple 
             </h3>
             <h3>
                 <div style={{display: 'flex',flexDirection:'column', alignItems: 'center',justifyContent:'center'}} >
-                <span style={{marginLeft:'30px'}} className="text-wrapper"> 1. สำเนาบัตรประชาชน </span> 
-                <span style={{marginLeft:'30px'}} className="text-wrapper"> 2. สำเนาทะเบียนบ้าน </span>
+                {/*<span style={{marginLeft:'30px'}} className="text-wrapper"> 1. สำเนาบัตรประชาชน </span> 
+                <span style={{marginLeft:'30px'}} className="text-wrapper"> 2. สำเนาทะเบียนบ้าน </span>*/}
                 <span style={{ color: "#6B6B6B" }} className="span"> (ไฟล์ .pdf แต่ละไฟล์ขนาดไม่เกิน 10MB)</span>
-                </div>
+              </div>
             </h3>
     </div>
 
