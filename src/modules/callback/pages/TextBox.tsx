@@ -36,6 +36,11 @@ const TextBox: React.FC<TextBoxProps> = ({ onTextChange }) => {
           overflow: "auto"
         }}
       />
+                <h3 style={{marginTop: '40px',
+            display: 'flex',flexDirection:'column', alignItems: 'center',justifyContent:'center',marginBottom:'5px'}}>
+            <span  className="text-wrapper">กรุณาตรวจสอบข้อมูลของท่านให้เรียบร้อย ก่อนกดยืนยันการขอ</span>
+            </h3>
+      
     </>
   );
 };

@@ -254,7 +254,7 @@ const Genpdf: React.FC<GenpdfProps> = ({ docs, setType }) => {
         <div style={topic}>{docs}</div>
         <label>หนังสือรับรองฉบับนี้ให้ไว้เพื่อแสดงว่า </label>
         <br />
-        <label> คำนำหน้าชื่อ</label>
+        <label> คำนำหน้าชื่อ</label><span style={{ color: "red" }}>*</span>
         <select onChange={(e) => setPrename(e.target.value)} style={dropdown}>
           <option value="">Select</option>
           {preNameOptions.map((prenames, index) => (
@@ -274,7 +274,7 @@ const Genpdf: React.FC<GenpdfProps> = ({ docs, setType }) => {
         </label>{" "}
         <br />
         <label>ในปีการศึกษา 2566 เป็นนักศึกษาระดับปริญญาตรี </label>
-        <label>ชั้นปีที่ </label>
+        <label>ชั้นปีที่ </label><span style={{ color: "red" }}>*</span>
         <select
           onChange={(e) => {
             const value = e.target.value;
@@ -290,7 +290,7 @@ const Genpdf: React.FC<GenpdfProps> = ({ docs, setType }) => {
           ))}
         </select>
         <br />
-        <label>สาขาวิชา</label>
+        <label>สาขาวิชา</label><span style={{ color: "red" }}>*</span>
         <select
           onChange={(e) => {
             if (!isEmpty(e.target.value)) {

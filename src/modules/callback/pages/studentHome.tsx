@@ -32,35 +32,53 @@ function StudentHome() {
     "ใบคำขอทั่วไป"
   ];
 
+  const [filledParts, setFilledParts] = useState<number>(0);
+
   const handleButtonClick = (doc: string) => {
     setSelectedDoc(doc);
+    setFilledParts((prev) => (prev < 4 ? prev + 1 : prev));
   };
 
   const handleFileUpload = (files: FileList) => {
     setUploadedFiles((prevFiles) => [...prevFiles, ...Array.from(files)]);
+    setFilledParts((prev) => (prev < 4 ? prev + 1 : prev));
   };
 
   const handlePictureUpload = (files: FileList) => {
-      setCurrentPicture(files[0]);
+    setCurrentPicture(files[0]);
     setUploadedPictures((prevPictures) => [...prevPictures, ...Array.from(files)]);
+    setFilledParts((prev) => (prev < 4 ? prev + 1 : prev));
   };
 
   const handleDeleteFile = (index: number) => {
     setUploadedFiles((prevFiles) => prevFiles.filter((_, i) => i !== index));
+    // Reset the file input value
+    const fileInput = document.getElementById("fileInput") as HTMLInputElement;
+    if (fileInput) {
+      fileInput.value = "";
+    }
   };
 
   const handleDeletePicture = () => {
     setCurrentPicture(null);
     setUploadedPictures([]);
+    setFilledParts((prev) => (prev > 0 ? prev - 1 : prev));
   };
 
   const handleTextChange = (text: string) => {
-    // Do something with the entered text, if needed
-    console.log("Entered text:", text);
-    setReason(text);
+    const trimmedText = text.trim();
+    setReason(trimmedText); // Trim leading and trailing whitespaces
+    setFilledParts((prev) => (trimmedText !== "" ? prev + 1 : prev));
   };
 
-  // Explicitly define the type for buttonStyle
+  const isFormFilled =
+  selectedDoc &&
+  (
+    (selectedDoc === "ขอเอกสาร" && false) || // Adjust condition for the first part as needed
+    (selectedDoc === "ใบคำขอทั่วไป" && reason.trim() !== "") || // Check if textbox is not empty for specific document
+    (selectedDoc !== "ใบคำขอทั่วไป" && reason.trim() !== "" && uploadedFiles.length > 0 && (uploadedPictures.length > 0 || currentPicture))
+  );
+  
   const buttonStyle: React.CSSProperties = {
     borderRadius: "10px",
     width: "500px",
@@ -131,6 +149,7 @@ function StudentHome() {
     toast.success("ส่งใบคำขอเสร็จสิ้น");
     setIsDisabled(false);
   };
+
 
   return (
     <div className="flex justify-center w-full h-full">
@@ -263,24 +282,25 @@ function StudentHome() {
               </ul>
             </div>
           )}
-
+          
           {selectedDoc && <TextBox onTextChange={handleTextChange} />}
-          {selectedDoc && (
-            <Button
-              className={`mt-10 w-full h-full px-2 py-2 rounded-xl text-white ${
-                isHovered ? "hovered" : ""
-              }`}
-              label="ยืนยัน"
-              onClick={handleSubmit}
-              disabled={isDisabled}
-              style={{ backgroundColor: isHovered ? "#8B0213" : "#B91A2F" }}
-              onMouseEnter={() => setIsHovered(true)}
-              onMouseLeave={() => setIsHovered(false)}
-            ></Button>
-          )}
+          
+              {selectedDoc && (
+                <Button
+                  className={`mt-10 w-full h-full px-2 py-2 rounded-xl text-white ${
+                    isHovered ? "hovered" : ""
+                  }`}
+                  label="ยืนยัน"
+                  onClick={handleSubmit}
+                  disabled={!isFormFilled || isDisabled}
+                  style={{ backgroundColor: isHovered ? "#8B0213" : "#B91A2F" }}
+                  onMouseEnter={() => setIsHovered(true)}
+                  onMouseLeave={() => setIsHovered(false)}
+                ></Button>
+              )}
         </div>
       </div>
-    </div>
+      </div>
   );
 };
 
